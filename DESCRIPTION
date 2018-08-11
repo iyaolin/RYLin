@@ -3,8 +3,9 @@ Type: Package
 Title: YLin's Personal Package for R Related Daily Work
 Version: 0.1.0
 Author: Lin Yao
+Maintainer: Lin Yao <yaolin.bnu@gmail.com>
 Description: This is my personal library used to automate and fasten my everyday R related work (inspired by lares). You are welcome to install, use, and comment on any of its code and functionalities. 
 License: GPL
 Encoding: UTF-8
 LazyData: TRUE
-Maintainer: Lin Yao <yaolin.bnu@gmail.com>
+
