@@ -12,7 +12,6 @@
 connect_presto <- function(server_type = "nm",
                            db_type = "dbi",
                            schema_name = NA_character_) {
-
   c <- config::get(config = 'presto', file = '~/config.yml')
   hostname <- sprintf("http://%s",
                       ifelse(server_type == "nm", c$host_nm,
@@ -40,7 +39,6 @@ connect_presto <- function(server_type = "nm",
       catalog = c$catalog
     )
   }
-
 }
 
 # con <- connect_presto()
