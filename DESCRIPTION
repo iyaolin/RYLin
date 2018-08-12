@@ -8,4 +8,4 @@ Description: This is my personal library used to automate and fasten my everyday
 License: GPL
 Encoding: UTF-8
 LazyData: TRUE
-
+RoxygenNote: 6.1.0
