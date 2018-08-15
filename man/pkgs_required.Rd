@@ -3,7 +3,7 @@
 \docType{data}
 \name{pkgs_required}
 \alias{pkgs_required}
-\title{Load most frequently used packages}
+\title{load most frequently used packages}
 \format{An object of class \code{character} of length 16.}
 \usage{
 pkgs_required
@@ -17,7 +17,7 @@ pkgs_required
 vector, if a package is sucessfully loaded
 }
 \description{
-Load most frequently used packages
+load most frequently used packages
 }
 \examples{
 load_packages()

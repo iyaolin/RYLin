@@ -35,7 +35,7 @@ pkgs_required <- c(
   'data.table'
 )
 
-load_packages <- function(pkgs = pkgs_required, install = TRUE){
+loadPackages <- function(pkgs = pkgs_required, install = TRUE){
 
   if (install) {
     packages_to_install = pkgs[!(pkgs %in% installed.packages()[, 1])]

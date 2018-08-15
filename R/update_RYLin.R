@@ -9,7 +9,7 @@
 #' @export
 
 
-update_RYLin <- function(local = FALSE, force = FALSE, restart = FALSE) {
+updateRYLin <- function(local = FALSE, force = FALSE, restart = FALSE) {
 
   RYLin::load_packages(c('devtools', 'config'))
   # suppressMessages(require(devtools))

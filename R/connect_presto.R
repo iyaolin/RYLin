@@ -9,7 +9,7 @@
 #' @export
 
 
-connect_presto <- function(server_type = "nm",
+connectPresto <- function(server_type = "nm",
                            db_type = "dbi",
                            schema_name = NA_character_) {
   c <- config::get(config = 'presto', file = '~/config.yml')

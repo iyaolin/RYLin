@@ -1,4 +1,4 @@
-connect_enver <- function(db_type = "dbi"){
+connectEnver <- function(db_type = "dbi"){
   c <- config::get(config = 'enver', file = '~/config.yml')
   # pool <- pool::dbPool(
   #   drv = RPostgreSQL::PostgreSQL(),
