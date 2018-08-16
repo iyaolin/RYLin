@@ -43,3 +43,13 @@ fillNAs <- function(dt, col.name, default.cat = 'None', default.num = NA){
   dt[is.na(get(col.name)), (col.name) := fillvalue]
   invisible(NULL)
 }
+
+
+# formatCols: format columns types
+formatCols <- function(dt, col.names, type = 'factor'){
+  cmdstring <- sprintf("dt[, (col.names) := lapply(.SD, as.%s), .SDcols = col.names]", type)
+  eval(parse(text = cmdstring))
+}
+
+#
+#
