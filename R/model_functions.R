@@ -58,4 +58,10 @@ viewSingleVar <- function(dt, col){
 }
 
 
+# get_binCI ---------------------------------------------------------------
+# get_binCI: confidence interval for binary variable
+get_binCI  <- function(x, n) {
+  bi <- binom.test(x, n)$conf.int
+  data_frame(lwr = bi[1], upr = bi[2])
+}
 
