@@ -14,6 +14,7 @@
 pkgs_required <- c(
   'tidyverse',
   'ggplot2',
+  'ggthemes',
   'viridis',
   'stringi',
   'hrbrthemes',
