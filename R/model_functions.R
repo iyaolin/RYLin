@@ -14,8 +14,10 @@ showNAInfo <- function(df, na.prop = 0.0){
   tmp <- data.table(col = names(df),
                   totalcnt = nrow(df),
                   nacnt = apply(is.na(df), MARGIN = 2, sum))
-  tmp[, prop := round(nacnt / totalcnt, 6)]
-  t[prop >= na.prop][order(-prop)]
+  # tmp[, prop := round(nacnt / totalcnt, 6)]
+  # tmp[prop >= na.prop][order(-prop)]
+  message(class(tmp))
+  return(tmp)
 }
 
 
