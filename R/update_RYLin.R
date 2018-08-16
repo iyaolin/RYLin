@@ -11,7 +11,7 @@
 
 updateRYLin <- function(local = FALSE, force = FALSE, restart = FALSE) {
 
-  RYLin::load_packages(c('devtools', 'config'))
+  RYLin::loadPackages(c('devtools', 'config'))
   # suppressMessages(require(devtools))
   # suppressMessages(require(config))
 
