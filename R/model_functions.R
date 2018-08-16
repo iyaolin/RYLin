@@ -11,10 +11,10 @@
 #' @export
 
 showNAInfo <- function(df, na.prop = 0.0){
-  t <- data.table(col = names(df),
+  tmp <- data.table(col = names(df),
                   totalcnt = nrow(df),
                   nacnt = apply(is.na(df), MARGIN = 2, sum))
-  t[, prop := round(nacnt / totalcnt, 6)]
+  tmp[, prop := round(nacnt / totalcnt, 6)]
   t[prop >= na.prop][order(-prop)]
 }
 
