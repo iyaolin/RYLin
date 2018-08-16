@@ -11,7 +11,7 @@
 #'
 #' @export
 
-pkgs_required <- c(
+pkgs_default <- c(
   'tidyverse',
   'ggplot2',
   'ggthemes',
@@ -36,7 +36,9 @@ pkgs_required <- c(
   'data.table'
 )
 
-loadPackages <- function(pkgs = pkgs_required, install = TRUE){
+pkgs_vis <- c("grid", 'gridExtra', 'RColorBrewer', 'corrplot', 'ggforce', 'ggridges')
+
+loadPackages <- function(pkgs = pkgs_default, install = TRUE){
 
   if (install) {
     packages_to_install = pkgs[!(pkgs %in% installed.packages()[, 1])]

@@ -51,5 +51,11 @@ formatCols <- function(dt, col.names, type = 'factor'){
   eval(parse(text = cmdstring))
 }
 
-#
-#
+
+# viewSingleVar: table view of the distribution of variable x
+viewSingleVar <- function(dt, col){
+  dt[, .N, keyby = base::get(col)][, pct := sprintf("%.3f", N / sum(N))][]
+}
+
+
+
