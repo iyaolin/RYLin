@@ -10,16 +10,15 @@
 #'
 #' @export
 
-showNAInfo <- function(df, na.prop = 0.0){
-  tmp <- data.table(col = names(df),
-                  totalcnt = nrow(df),
-                  nacnt = apply(is.na(df), MARGIN = 2, sum))
-  # tmp[, prop := round(nacnt / totalcnt, 6)]
-  # tmp[prop >= na.prop][order(-prop)]
-  message(class(tmp))
-  return(tmp)
+showNAInfo <- function(dt, na.prop = 0.0){
+  # if (!'data.table' %in% loadedNamespaces()) {loadPackages('data.table')}
+  t <- data.table(col = names(dt),
+                  totalcnt = nrow(dt),
+                  nacnt = apply(is.na(dt), MARGIN = 2, sum))
+  message(is.data.table(t) == TRUE)
+  t[, ':='(prop = round(nacnt / totalcnt, 6))]
+  t[prop >= na.prop][order(-prop)]
 }
-
 
 
 #' fillNAs: fill NAs with the most frequent value(for numeric) or default value(for category)
@@ -42,4 +41,5 @@ fillNAs <- function(dt, col.name, default.cat = 'None', default.num = NA){
     fillvalue <- ifelse(is.na(default.cat), names(which.max(table(t))), default.cat)
   }
   dt[is.na(get(col.name)), (col.name) := fillvalue]
+  invisible(NULL)
 }
