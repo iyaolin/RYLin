@@ -53,3 +53,36 @@ renderMultiPlot <-
       }
     }
   }
+
+
+
+
+
+# plotErrorBar ------------------------------------------------------------
+
+# plotErrorBar : customized ggplot2 bar plot with error bar
+plotErrorBar <- function(df, x, y) {
+  t <- df[, .N, keyby = .(vx = get(x),
+                          vy = get(y))] %>%
+    dcast.data.table(vx ~ vy, value.var = "N") %>%
+    '['(, value := `1` / (`1` + `0`)) %>%
+    '['()
+  gd <-
+    t[, c('lwr', 'upr') := get_binCI(`1`, `1` + `0`), by = 1:nrow(t)][]
+  setnames(gd, old = 'vx', x)
+  p <- gd  %>%
+    ggplot(aes_string(x, 'value', fill = x)) +
+    geom_col() +
+    geom_errorbar(
+      aes(ymin = lwr, ymax = upr),
+      width = 0.3,
+      size = 0.7,
+      color = "gray30"
+    ) +
+    theme_light() +
+    theme(legend.position = "none")
+  list(gd, p)
+}
+
+
+

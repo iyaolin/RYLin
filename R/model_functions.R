@@ -65,3 +65,24 @@ get_binCI  <- function(x, n) {
   data_frame(lwr = bi[1], upr = bi[2])
 }
 
+
+
+# Mode --------------------------------------------------------------------
+
+#' Mode: Return the value that occurs the most frequently in vector x
+#'
+#' @param x vector
+#'
+#' @return
+#'
+#' @examples
+#' Model(c(1,1,1,1:10))
+#'
+#' @export
+
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+

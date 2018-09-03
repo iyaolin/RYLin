@@ -10,23 +10,11 @@
 #'
 #' @examples
 #' add_commas(c(231, 91310, 2123, 9911001020, 999723285))
-
-addCommas <-
+add_commas <-
   function(numbers)
   {
     format(numbers,
            big.mark = ",",
            scientific = FALSE,
            trim = TRUE)
-
-    add_commas <-
-      function(numbers)
-      {
-        format(
-          numbers,
-          big.mark = ",",
-          scientific = FALSE,
-          trim = TRUE
-        )
-      }
   }
