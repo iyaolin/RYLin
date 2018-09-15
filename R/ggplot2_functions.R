@@ -61,10 +61,10 @@ renderMultiPlot <-
 # plotErrorBar ------------------------------------------------------------
 
 # plotErrorBar : customized ggplot2 bar plot with error bar
-plotErrorBar <- function(df, x, y) {
+plotErrorBar.bi <- function(df, x, y) {
   t <- df[, .N, keyby = .(vx = get(x),
                           vy = get(y))] %>%
-    dcast.data.table(vx ~ vy, value.var = "N") %>%
+    dcast.data.table(vx ~ vy, value.var = "N", fill = 0L) %>%
     '['(, value := `1` / (`1` + `0`)) %>%
     '['()
   gd <-
@@ -83,6 +83,90 @@ plotErrorBar <- function(df, x, y) {
     theme(legend.position = "none")
   list(gd, p)
 }
+
+
+
+# plotFactorVar --------------------------------------------------------------
+plotFactorVar <- function(df, col) {
+  g <- ggplot(df, aes_string(col, fill = col)) +
+    geom_bar() +
+    theme_minimal() +
+    theme(legend.position = 'none')
+  return(g)
+}
+
+
+# plotNumericVar ----------------------------------------------------------------
+plotNumericVar <- function(df, col) {
+  ggplot(df, aes_string(col)) +
+    geom_histogram(bins = 30, color = 'grey10') +
+    theme_bw()
+}
+# plotNumericVar(df, 'purchase')
+
+
+
+
+# plotErrorBar ------------------------------------------------------------
+
+
+## Gives count, mean, standard deviation, standard error of the mean, and confidence interval (default 95%).
+##   data: a data table.
+##   measurevar: the name of a column that contains the variable to be summariezed
+##   groupvars: a vector containing names of columns that contain grouping variables
+##   na.rm: a boolean that indicates whether to ignore NA's
+##   conf.interval: the percent range of the confidence interval (default is 95%)
+plotErrorBar <-
+  function(data = NULL,
+           measurevar,
+           groupvars = NULL,
+           na.rm = FALSE,
+           conf.interval = .95,
+           .drop = TRUE) {
+
+    # # New version of length which can handle NA's: if na.rm==T, don't count them
+    # length2 <- function (x, na.rm = FALSE) {
+    #   if (na.rm)
+    #     sum(!is.na(x))
+    #   else
+    #     length(x)
+    # }
+
+    # This does the summary. For each group's data frame, return a vector with
+    # N, mean, and sd
+    gd <- df[, list(cnt = .N,
+                    N = length2(get(measurevar), na.rm = na.rm),
+                    avg = mean(get(measurevar), na.rm = na.rm),
+                    sd = sd(get(measurevar), na.rm = na.rm)
+    ), keyby = list(grp = get(groupvars))]
+
+    # Rename the "mean" column
+    setnames(gd, 'avg', measurevar)
+    setnames(gd, 'grp', groupvars)
+
+    # Calculate standard error of the mean
+    gd[, se := sd / sqrt(N)]
+
+    # Confidence interval multiplier for standard error
+    # Calculate t-statistic for confidence interval:
+    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+    gd[, ':='(lwr = avg - se * qt(conf.interval / 2 + .5, N - 1),
+              upr = avg + se * qt(conf.interval / 2 + .5, N - 1)
+    ), keyby = list(grp)]
+
+    p <- gd  %>%
+      ggplot(aes_string(groupvars, measurevar, fill = groupvars)) +
+      geom_col(alpha = 0.8) +
+      geom_errorbar(
+        aes(ymin = lwr, ymax = upr),
+        width = 0.3,
+        size = 0.7,
+        color = "gray30"
+      ) +
+      theme_light() +
+      theme(legend.position = "none")
+    list(gd, p)
+  }
 
 
 

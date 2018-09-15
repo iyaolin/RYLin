@@ -46,8 +46,8 @@ fillNAs <- function(dt, col.name, default.cat = 'None', default.num = NA){
 
 
 # formatCols: format columns types
-formatCols <- function(dt, col.names, type = 'factor'){
-  cmdstring <- sprintf("dt[, (col.names) := lapply(.SD, as.%s), .SDcols = col.names]", type)
+formatCols <- function(dt, col.names, col.type = 'factor'){
+  cmdstring <- sprintf("dt[, (col.names) := lapply(.SD, as.%s), .SDcols = col.names]", col.type)
   eval(parse(text = cmdstring))
 }
 

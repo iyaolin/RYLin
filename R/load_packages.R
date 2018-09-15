@@ -39,13 +39,11 @@ pkgs_default <- c(
 pkgs_vis <- c("grid", 'gridExtra', 'RColorBrewer', 'corrplot', 'ggforce', 'ggridges')
 
 loadPackages <- function(pkgs = pkgs_default, install = TRUE){
-
   if (install) {
     packages_to_install = pkgs[!(pkgs %in% installed.packages()[, 1])]
     if (length(packages_to_install) > 0) {
       install.packages(packages_to_install)
     }
   }
-
   sapply(pkgs, require, character.only = TRUE)
 }
