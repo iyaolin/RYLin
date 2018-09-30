@@ -96,3 +96,19 @@ Mode <- function(x) {
 }
 
 
+#' plotCaretModel: plot caret model results
+#' @param model caret fit model
+#' @param
+#' @param
+#'
+#' @return NULL
+#'
+#' @examples
+#'
+#'
+#' @export
+plotCaretModel <- function(model){
+  ggplot(model) +
+    coord_cartesian() +
+    theme_RYLin()
+}
