@@ -22,11 +22,6 @@ pkgs_default <- c(
   'DT',
   'scales',
   'magrittr',
-  # 'shiny',
-  # 'shinydashboard',
-  # 'shinythemes',
-  # 'leaflet',
-  # 'highcharter',
   'Hmisc',
   'RPresto',
   'DBI',
@@ -37,7 +32,8 @@ pkgs_default <- c(
 )
 
 pkgs_vis <- c("grid", 'gridExtra', 'RColorBrewer', 'corrplot', 'ggforce', 'ggridges')
-# pkgs_ml <- c('OpenML', 'mlr', 'h2o', 'caret')
+pkgs_ml <- c('OpenML', 'mlr', 'h2o', 'caret')
+pkgs_shiny <- c('shiny', 'shinydashboard', 'shinythemes', 'leaflet', 'highcharter')
 
 loadPackages <- function(pkgs = pkgs_default, install = TRUE){
   if (install) {
