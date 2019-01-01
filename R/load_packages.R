@@ -31,6 +31,7 @@ pkgs_default <- c(
   'data.table'
 )
 
+#additional packages
 pkgs_vis <- c("grid", 'gridExtra', 'RColorBrewer', 'corrplot', 'ggforce', 'ggridges')
 pkgs_ml <- c('OpenML', 'mlr', 'h2o', 'caret')
 pkgs_shiny <- c('shiny', 'shinydashboard', 'shinythemes', 'leaflet', 'highcharter')
